@@ -23,8 +23,13 @@ public class FileWrite extends BaseCommand {
     @Parameter(names = {"--count", "-c"}, description = "The file count")
     private int fileCount = 10;
 
+    @Parameter(names = {"--file", "-f"}, description = "Whether to use the file channel")
+    private boolean fileChannel = false;
+
     @Parameter(names = {"--random", "-r"}, description = "Whether to use MADV_RANDOM")
     private boolean random = false;
+
+
 
     private int fileSize = 1014 * 1024 * 1024;
 
@@ -41,10 +46,11 @@ public class FileWrite extends BaseCommand {
                 last = current;
                 if (random) {
                     ((DefaultMmapFile) current).madvise(true);
+                } else if (fileChannel) {
+                    ((DefaultMmapFile) current).setWriteWithFileChannel(true);
                 }
             }
         }
         log.info("[{}] maxSize={} cost={}", this.getClass().getSimpleName(), mmapFileList.getMaxWrotePosition(), UtilAll.elapsed(start));
-
     }
 }

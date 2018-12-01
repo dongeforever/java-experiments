@@ -57,6 +57,8 @@ public class DefaultMmapFile extends ReferenceResource implements MmapFile {
     private volatile long storeTimestamp = 0;
     private boolean firstCreateInQueue = false;
 
+    private boolean writeWithFileChannel = false;
+
     public DefaultMmapFile(final String fileName, final int fileSize) throws IOException {
         this.fileName = fileName;
         this.fileSize = fileSize;
@@ -186,9 +188,20 @@ public class DefaultMmapFile extends ReferenceResource implements MmapFile {
         int currentPos = this.wrotePosition.get();
 
         if ((currentPos + length) <= this.fileSize) {
-            ByteBuffer byteBuffer = this.mappedByteBuffer.slice();
-            byteBuffer.position(currentPos);
-            byteBuffer.put(data, offset, length);
+            if (writeWithFileChannel) {
+                try {
+                    ByteBuffer buffer = ByteBuffer.wrap(data);
+                    buffer.position(offset);
+                    buffer.limit(offset + length);
+                    fileChannel.write(ByteBuffer.wrap(data), currentPos);
+                } catch (Throwable t) {
+                    logger.error("", t);
+                }
+            } else {
+                ByteBuffer byteBuffer = this.mappedByteBuffer.slice();
+                byteBuffer.position(currentPos);
+                byteBuffer.put(data, offset, length);
+            }
             this.wrotePosition.addAndGet(length);
             return true;
         }
@@ -453,5 +466,13 @@ public class DefaultMmapFile extends ReferenceResource implements MmapFile {
     @Override
     public String toString() {
         return this.fileName;
+    }
+
+    public boolean isWriteWithFileChannel() {
+        return writeWithFileChannel;
+    }
+
+    public void setWriteWithFileChannel(boolean writeWithFileChannel) {
+        this.writeWithFileChannel = writeWithFileChannel;
     }
 }

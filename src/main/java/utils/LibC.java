@@ -24,9 +24,11 @@ import com.sun.jna.Pointer;
 
 /**
  * https://docs.oracle.com/cd/E19253-01/816-5168/6mbb3hrft/index.html
+ * https://unix.stackexchange.com/questions/76970/how-do-pdflush-kjournald-swapd-etc-interoperate
  */
 
 public interface LibC extends Library {
+
     LibC INSTANCE = (LibC) Native.loadLibrary(Platform.isWindows() ? "msvcrt" : "c", LibC.class);
     int MADV_NORMAL = 0;
     int MADV_RANDOM = 1;

@@ -12,7 +12,6 @@ import utils.UtilAll;
 
 public class FileWrite extends BaseCommand {
 
-    private static Logger log = LoggerFactory.getLogger("java-experiments");
 
     @Parameter(names = {"--dir", "-d"}, description = "The directory to store the test data")
     private String dir =  System.getProperty("user.home") + File.separator + "mmapteststore";

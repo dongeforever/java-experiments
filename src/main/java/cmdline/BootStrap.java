@@ -3,6 +3,7 @@ package cmdline;
 import com.beust.jcommander.JCommander;
 import fs.FileRead;
 import fs.FileWrite;
+import gc.GCDirect;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +12,7 @@ public class BootStrap {
         Map<String, BaseCommand> commands = new HashMap<>();
         commands.put("fw", new FileWrite());
         commands.put("fr", new FileRead());
+        commands.put("dgc", new GCDirect());
 
         JCommander.Builder builder = JCommander.newBuilder();
         for (String cmd : commands.keySet()) {

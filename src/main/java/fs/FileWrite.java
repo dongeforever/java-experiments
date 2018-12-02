@@ -6,8 +6,6 @@ import fs.base.DefaultMmapFile;
 import fs.base.MmapFile;
 import fs.base.MmapFileList;
 import java.io.File;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import utils.UtilAll;
 
 public class FileWrite extends BaseCommand {

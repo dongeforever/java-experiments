@@ -28,7 +28,7 @@ public class FileWrite extends BaseCommand {
 
 
 
-    private int fileSize = 1014 * 1024 * 1024;
+    private int fileSize = 1024 * 1024 * 1024;
 
     @Override public void doCommand() {
 

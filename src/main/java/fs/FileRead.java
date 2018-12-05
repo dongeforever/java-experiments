@@ -8,9 +8,6 @@ import fs.base.MmapFileList;
 import fs.base.SelectMmapBufferResult;
 import java.io.File;
 import java.nio.ByteBuffer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import utils.LibC;
 import utils.UtilAll;
 
 public class FileRead extends BaseCommand {
@@ -37,7 +34,7 @@ public class FileRead extends BaseCommand {
     private boolean random = false;
 
 
-    private int fileSize = 1014 * 1024 * 1024;
+    private int fileSize = 1024 * 1024 * 1024;
 
 
 
@@ -45,7 +42,7 @@ public class FileRead extends BaseCommand {
 
         MmapFileList mmapFileList = new MmapFileList(dir, fileSize);
         mmapFileList.load();
-        long maxSize =  fileSize * fileCount;
+        long maxSize =  (long) fileSize * fileCount;
         long start = System.currentTimeMillis();
         int num = 0;
         if (random) {

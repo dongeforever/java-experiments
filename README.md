@@ -12,6 +12,7 @@
 
 [how do pdflush, kjournald, swapd, etc interoperate](https://unix.stackexchange.com/questions/76970/how-do-pdflush-kjournald-swapd-etc-interoperate)  
 [kernel-map-code](http://makelinux.net/kernel_map/)  
-[linux perf tools](http://www.brendangregg.com/linuxperf.html)  
+[linux perf tools](http://www.brendangregg.com/linuxperf.html) 
+[Size the java process](https://blogs.vmware.com/apps/2011/06/taking-a-closer-look-at-sizing-the-java-process.html) 
 
 
